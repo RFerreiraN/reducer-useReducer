@@ -1,37 +1,12 @@
 import { useState } from 'react';
-
+import { UseForm } from '../Hooks/UseForm';
 
 
 export const FormularioComponent = () => {
 
-  const [formState, setFormState] = useState({
-    email: '',
-    password: ''
-  })
+  const {formState, handleInput, formSubmit, resetForm} = UseForm()
 
-  const { email, password } = formState;
-
-  const handleInput = ({ target }) => {
-    const {value, name} = target
-    setFormState({
-      ...formState,
-      [name] : value
-    })
-  }
-
-  const resetForm = () => {
-    setFormState({
-      email: '',
-      password: ''
-    })
-  }
-
-  const formSubmit = (event) => {
-    event.preventDefault()
-    if(formState.email.trim() === '' || formState.password.trim() === '') return
-    console.log(formState)
-    resetForm()
-  }
+   const { email, password } = formState;
 
   return (
     <form onSubmit={formSubmit}>
