@@ -6,6 +6,6 @@ import { ListadoTareas } from './Components/ListadoTareas'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <FormularioComponent/>
+    <ListadoTareas/>
   </StrictMode>,
 )
