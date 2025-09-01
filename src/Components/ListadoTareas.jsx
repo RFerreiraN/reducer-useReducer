@@ -52,18 +52,14 @@
       }
   }
 
-  console.log(tareaReducer(initialState, modificarTarea))
-
-
-
-
-
+  console.log(tareaReducer(initialState, agregarTarea))
 
 export const ListadoTareas = () => {
   return (
     <>
       <h1>reducer/useReducer</h1>
       <hr />
+
     </>
   )
 }

@@ -4,9 +4,21 @@ import { UseForm } from '../Hooks/UseForm';
 
 export const FormularioComponent = () => {
 
-  const {formState, handleInput, formSubmit, resetForm} = UseForm()
+  const initialState = {
+    email: '',
+    password: ''
+  }
 
-   const { email, password } = formState;
+  const { formState, handleInput } = UseForm(initialState)
+
+  const { email, password } = formState;
+
+  const formSubmit = (event) => {
+    event.preventDefault()
+    console.log(formState)
+    resetForm()
+  }
+
 
   return (
     <form onSubmit={formSubmit}>
