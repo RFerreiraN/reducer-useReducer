@@ -4,12 +4,10 @@ import { UseForm } from '../Hooks/UseForm';
 
 export const FormularioComponent = () => {
 
-  const initialState = {
+  const { formState, handleInput } = UseForm({
     email: '',
     password: ''
-  }
-
-  const { formState, handleInput } = UseForm(initialState)
+  })
 
   const { email, password } = formState;
 

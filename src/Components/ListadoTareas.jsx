@@ -44,7 +44,6 @@ const tareaReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case '[TAREAS] Agregar Tarea':
       return [...state, action.payload]
-
     case '[TAREAS] Modificar Tarea':
       return [...state, action.payload]
     case '[TAREAS] Eliminar Tarea':
@@ -55,10 +54,9 @@ const tareaReducer = (state = initialState, action = {}) => {
 }
 
 
-
 export const ListadoTareas = () => {
 
-  const {tarea, formState, handleInput} = UseForm({tarea: ''});
+  const { tarea, formState, handleInput } = UseForm({ tarea: '' });
 
   const onsubmitForm = (event) => {
     event.preventDefault();
