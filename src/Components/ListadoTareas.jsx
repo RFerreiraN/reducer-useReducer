@@ -1,5 +1,6 @@
 // estado inicial
 
+import { useReducer } from "react";
 import { UseForm } from "../Hooks/UseForm";
 
 const initialState = [{
@@ -25,10 +26,7 @@ const updateTarea = {
 
 //acciones
 
-const agregarTarea = {
-  type: '[TAREAS] Agregar Tarea',
-  payload: nuevaTarea
-}
+
 
 const modificarTarea = {
   type: '[TAREAS] Modificar Tarea',
@@ -45,8 +43,9 @@ const tareaReducer = (state = initialState, action = {}) => {
     case '[TAREAS] Agregar Tarea':
       return [...state, action.payload]
     case '[TAREAS] Modificar Tarea':
-      return [...state, action.payload]
+      console.log('Modificar')
     case '[TAREAS] Eliminar Tarea':
+      console.log('Borrar Todo')
       return []
     default:
       return state;
@@ -56,17 +55,30 @@ const tareaReducer = (state = initialState, action = {}) => {
 
 export const ListadoTareas = () => {
 
+  const [state, dispatch] = useReducer(tareaReducer, initialState)
+  
   const { tarea, formState, handleInput } = UseForm({ tarea: '' });
-
-  const onsubmitForm = (event) => {
+  const agregarTarea = (event) => {
     event.preventDefault();
+    if( formState.tarea.trim() == '') return
+    const tarea = {
+      id: new Date().getTime(),
+      tarea: formState.tarea,
+      finalizada: false
+    }
+    const action = {
+      type : '[TAREAS] Agregar Tarea',
+      payload : tarea
+    }
     console.log(formState)
+    dispatch( action )
   }
+
   return (
     <>
       <h1>reducer/useReducer</h1>
       <hr />
-      <form onSubmit={onsubmitForm}>
+      <form onSubmit={agregarTarea}>
         <div className="mb-3">
           <input
             type="text"
@@ -79,6 +91,17 @@ export const ListadoTareas = () => {
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
+      <hr />
+      <ul>
+        {state.map(item => {
+          return (
+            <li key={item.id}>
+              {item.tarea}
+              {item.finalizada ? '✅' : '⛔'}
+              </li>
+          )
+        })}
+      </ul>
     </>
   )
 }
